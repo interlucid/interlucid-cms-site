@@ -1,5 +1,6 @@
 node_modules
-*.log
+
 /.cache
-/public/build
 /build
+/public/build
+.env
