@@ -1,8 +1,10 @@
 {
     "extends": ["@remix-run/eslint-config", "@remix-run/eslint-config/node"],
     "rules": {
+        "comma-dangle": ["error", "always-multiline"],
         "indent": ["error", 4],
         "semi": ["error", "always"],
-        "comma-dangle": ["error", "always-multiline"]
+        "linebreak-style": ["error", "unix"],
+        "eol-last": ["error", "always"]
     }
 }

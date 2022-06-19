@@ -1,47 +1,58 @@
 {
-  "name": "interlucid-cms-site",
-  "version": "0.0.1",
-  "description": "A site for the Interlucid music project that uses a headless CMS",
-  "scripts": {
-    "dev": "remix dev",
-    "lint": "eslint --ext .ts,.tsx app/** --fix",
-    "test": "echo lol you think we test this thing",
-    "build": "remix build",
-    "start": "remix-serve build"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/interlucid/interlucid-cms-site.git"
-  },
-  "keywords": [
-    "interlucid",
-    "website",
-    "cms"
-  ],
-  "author": "Brandon der Blätter",
-  "license": "UNLICENSED",
-  "bugs": {
-    "url": "https://github.com/interlucid/interlucid-cms-site/issues"
-  },
-  "homepage": "https://github.com/interlucid/interlucid-cms-site#readme",
-  "dependencies": {
-    "@remix-run/node": "^1.4.1",
-    "@remix-run/react": "^1.4.1",
-    "@remix-run/serve": "^1.4.1",
-    "contentful": "^9.1.24",
-    "dotenv": "^16.0.0",
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2"
-  },
-  "devDependencies": {
-    "@remix-run/dev": "^1.4.1",
-    "@remix-run/eslint-config": "^1.4.1",
-    "@types/react": "^17.0.24",
-    "@types/react-dom": "^17.0.9",
-    "eslint": "^8.11.0",
-    "typescript": "^4.5.5"
-  },
-  "engines": {
-    "node": ">=14"
-  }
+    "name": "interlucid-cms-site",
+    "version": "0.0.1",
+    "description": "A site for the Interlucid music project that uses a headless CMS",
+    "scripts": {
+        "dev:css": "tailwindcss -w -i ./styles/app.css -o app/styles/app.css",
+        "dev": "concurrently \"npm run dev:css\" \"remix dev\"",
+        "gen-types": "contentful-typescript-codegen --output types/contentful.d.ts",
+        "lint": "tsc && eslint --ext .ts,.tsx app/{components,routes}/** --fix",
+        "test": "echo lol you think we test this thing",
+        "build:css": "tailwindcss -m -i ./styles/app.css -o app/styles/app.css",
+        "build": "npm run build:css && remix build",
+        "start": "remix-serve build"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/interlucid/interlucid-cms-site.git"
+    },
+    "keywords": [
+        "interlucid",
+        "website",
+        "cms"
+    ],
+    "author": "Brandon der Blätter",
+    "license": "UNLICENSED",
+    "bugs": {
+        "url": "https://github.com/interlucid/interlucid-cms-site/issues"
+    },
+    "homepage": "https://github.com/interlucid/interlucid-cms-site#readme",
+    "dependencies": {
+        "@remix-run/node": "^1.4.1",
+        "@remix-run/react": "^1.4.1",
+        "@remix-run/serve": "^1.4.1",
+        "dotenv": "^16.0.0",
+        "react": "^17.0.2",
+        "react-dom": "^17.0.2",
+        "remix-utils": "^3.1.0"
+    },
+    "devDependencies": {
+        "@contentful/rich-text-types": "^15.12.1",
+        "@remix-run/dev": "^1.4.1",
+        "@remix-run/eslint-config": "^1.4.1",
+        "@types/react": "^17.0.24",
+        "@types/react-dom": "^17.0.9",
+        "autoprefixer": "^10.4.5",
+        "concurrently": "^7.1.0",
+        "contentful": "v10.0.0-beta-v10.5",
+        "contentful-management": "^10.0.0",
+        "contentful-typescript-codegen": "^3.2.3",
+        "eslint": "^8.11.0",
+        "postcss": "^8.4.12",
+        "tailwindcss": "^3.0.24",
+        "typescript": "^4.5.5"
+    },
+    "engines": {
+        "node": ">=14"
+    }
 }

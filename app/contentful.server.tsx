@@ -27,9 +27,55 @@ export const getEntryById = async (id: string) => {
     } catch (e) {
         console.error(e);
         return {
-            error: `an error occurred when fetching from Contentful`,
-        }
+            error: `an error occurred when fetching an entry by ID from Contentful`,
+        };
     }
-    // console.log(entry);
+    console.log(entry);
     return entry;
+};
+
+export const getAssetById = async (id: string) => {
+    let asset;
+    try {
+        asset = await client.getAsset(id);
+    } catch (e) {
+        console.error(e);
+        return {
+            error: `an error occurred when fetching an asset by ID from Contentful`,
+        };
+    }
+    console.log(asset);
+    return asset;
+};
+
+export const getEntriesByType = async (type: string, limit = 100, skip = 0) => {
+    let entries;
+    try {
+        entries = await client.getEntries({
+            content_type: type,
+        });
+    } catch (e) {
+        console.error(e);
+        return {
+            error: `an error occurred when fetching entries by type from Contentful`,
+        };
+    }
+    console.log(entries);
+    return entries;
+};
+
+export const getFirstEntryByType = async (type: string) => {
+    let entries;
+    try {
+        entries = await client.getEntries({
+            content_type: type,
+        });
+    } catch (e) {
+        console.error(e);
+        return {
+            error: `an error occurred when fetching entries by type from Contentful`,
+        };
+    }
+    console.log(entries);
+    return entries.items.length ? entries.items[0] : null;
 };
