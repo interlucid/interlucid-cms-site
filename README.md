@@ -4,6 +4,14 @@ a site for the Interlucid music project that uses a headless CMS
 
 ## Setup
 
+### Bare metal
+
+1. Clone repo
+2. `npm i`
+3. `npm run dev`
+
+### Docker
+
 if you're using Windows, make sure you clone this repo directly onto the WSL filesystem. otherwise the hot reloading will not work (see https://github.com/microsoft/WSL/issues/4739)
 
 1. Install Docker
