@@ -1,5 +1,5 @@
 import { Link } from '@remix-run/react';
-import { ClientOnly } from "remix-utils";
+import { ClientOnly } from "remix-utils/client-only";
 
 export default function Index() {
     
