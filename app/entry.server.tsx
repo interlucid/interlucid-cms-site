@@ -1,5 +1,5 @@
-import type { EntryContext } from "@remix-run/node";
-import { RemixServer } from "@remix-run/react";
+import type { EntryContext } from "react-router";
+import { ServerRouter } from "react-router";
 import { renderToString } from "react-dom/server";
 
 export default function handleRequest(
@@ -9,7 +9,7 @@ export default function handleRequest(
     remixContext: EntryContext,
 ) {
     const markup = renderToString(
-        <RemixServer context={remixContext} url={request.url} />,
+        <ServerRouter context={remixContext} url={request.url} />,
     );
 
     responseHeaders.set("Content-Type", "text/html");

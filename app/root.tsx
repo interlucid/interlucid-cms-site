@@ -1,14 +1,13 @@
 import {
     Link,
     Links,
-    LiveReload,
     Meta,
     Outlet,
     Scripts,
     ScrollRestoration,
     useRouteError,
     isRouteErrorResponse,
-} from "@remix-run/react";
+} from "react-router";
 import tailwindStylesheetUrl from "~/styles/app.css";
 
 import type {
@@ -16,11 +15,11 @@ import type {
     LinksFunction,
     MetaFunction,
     LoaderFunction,
-} from '@remix-run/node';
+} from 'react-router';
 
-export const links: LinksFunction = () => {
-    return [{ rel: "stylesheet", href: tailwindStylesheetUrl }];
-};
+// export const links: LinksFunction = () => {
+//     return [{ rel: "stylesheet", href: tailwindStylesheetUrl }];
+// };
 
 export const meta: MetaFunction = ({ matches }) => {
     const parentMeta = matches.flatMap(
@@ -81,7 +80,6 @@ export default function App() {
                 <Outlet />
                 <ScrollRestoration />
                 <Scripts />
-                <LiveReload />
             </body>
         </html>
     );

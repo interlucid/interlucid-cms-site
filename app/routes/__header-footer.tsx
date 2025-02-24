@@ -1,9 +1,10 @@
-import { Link, Outlet, useLoaderData } from '@remix-run/react';
+import { Link, Outlet, useLoaderData } from 'react-router';
+import type { LoaderFunctionArgs } from "react-router";
 import type { ILink } from 'types/contentful';
 import * as Contentful from '~/contentful.server';
 
-export const loader = async ({ request }) => {
-    const url = new URL(request.url);
+export const loader = async ({ context }: LoaderFunctionArgs) => {
+    const url = new URL(context.url);
     return {
         pathname: url.pathname,
         navEntry: await Contentful.getFirstEntryByType('primaryNavigation'),
@@ -17,7 +18,7 @@ export default function Nav() {
     console.log(pathname);
     return (
         <>
-            { pathname === '/' ? <img src={coverPhotoAsset.fields.file.url} /> : '' }
+            {pathname === '/' ? <img src={coverPhotoAsset.fields.file.url} /> : ''}
             <div className="bg-slate-700">
                 <ul className="list-none flex justify-end container mx-auto">
                     <li className="mr-auto p-2">
