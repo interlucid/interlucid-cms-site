@@ -15,21 +15,22 @@ import type {
     LinksFunction,
     MetaFunction,
     LoaderFunction,
-} from 'react-router';
+} from "react-router";
 
 // export const links: LinksFunction = () => {
 //     return [{ rel: "stylesheet", href: tailwindStylesheetUrl }];
 // };
 
 export const meta: MetaFunction = ({ matches }) => {
-    const parentMeta = matches.flatMap(
-        (match) => match.meta ?? [],
-    );
-    return [...parentMeta, {
-        title: "Interlucid - Epic retro synthpop from a dreamer",
-        charset: "utf-8",
-        viewport: "width=device-width,initial-scale=1",
-    }];
+    const parentMeta = matches.flatMap((match) => match.meta ?? []);
+    return [
+        ...parentMeta,
+        {
+            title: "Interlucid - Epic retro synthpop from a dreamer",
+            charset: "utf-8",
+            viewport: "width=device-width,initial-scale=1",
+        },
+    ];
 };
 
 export function ErrorBoundary() {
@@ -61,7 +62,13 @@ export function ErrorBoundary() {
                 <Links />
             </head>
             <body className="bg-slate-900 text-white m-4">
-                There was an error. See the console for details.<br /><br />If you are a visitor this is not your fault. try the <Link to="/">home page</Link> or <a href="https://vibe.to/interlucid">listening to some music</a> in the meantime.
+                there was an error. See the console for details.
+                <br />
+                <br />
+                if you are a visitor this is not your fault. try the{" "}
+                <Link to="/">home page</Link> or{" "}
+                <a href="https://vibe.to/interlucid">listening to some music</a>{" "}
+                in the meantime.
                 <pre>{errorMessage}</pre>
                 <Scripts />
             </body>

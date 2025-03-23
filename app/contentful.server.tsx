@@ -1,17 +1,29 @@
-import 'dotenv/config';
-import * as contentful from 'contentful';
+import dotenv from "dotenv";
+import * as contentful from "contentful";
+import { TypeLinkFields, TypeReleaseFields } from "@genTypes/index";
 
-let client: contentful.ContentfulClientApi;
+dotenv.config();
+
+type TypeFields = {
+    link: TypeLinkFields;
+    release: TypeReleaseFields;
+};
+type ContentTypes = "link" | "release";
+
+let client: contentful.ContentfulClientApi<undefined>;
 try {
+    console.log(process.env);
     client = contentful.createClient({
         // This is the space ID. A space is like a project folder in Contentful terms
-        space: process.env.CONTENTFUL_SPACE_ID || '',
+        space: process.env.CONTENTFUL_SPACE_ID || "",
         // space: '' || '',
         // This is the access token for this space. Normally you get both ID and the token in the Contentful web app
-        accessToken: process.env.CONTENTFUL_DELIVERY_API_TOKEN || '',
+        accessToken: process.env.CONTENTFUL_DELIVERY_API_TOKEN || "",
     });
+    console.log("Created client");
+    console.log(client);
 } catch (e) {
-    console.error(e);
+    console.error("Error creating Contentful client", e);
 }
 // This API call will request an entry with the specified ID from the space defined at the top, using a space-specific access token.
 
@@ -27,7 +39,7 @@ export const getEntryById = async (id: string) => {
     } catch (e) {
         console.error(e);
         return {
-            error: `an error occurred when fetching an entry by ID from Contentful`,
+            error: "an error occurred when fetching an entry by ID from Contentful",
         };
     }
     console.log(entry);
@@ -41,41 +53,53 @@ export const getAssetById = async (id: string) => {
     } catch (e) {
         console.error(e);
         return {
-            error: `an error occurred when fetching an asset by ID from Contentful`,
+            error: "an error occurred when fetching an asset by ID from Contentful",
         };
     }
     console.log(asset);
     return asset;
 };
 
-export const getEntriesByType = async (type: string, limit = 100, skip = 0) => {
+export const getEntriesByType = async <Type extends ContentTypes>(
+    contentType: Type,
+    limit = 100,
+    skip = 0,
+) => {
     let entries;
     try {
-        entries = await client.getEntries({
-            content_type: type,
+        entries = await client.getEntries<
+            contentful.EntrySkeletonType<TypeFields[Type], Type>
+        >({
+            content_type: contentType,
+            limit,
+            skip,
         });
     } catch (e) {
         console.error(e);
         return {
-            error: `an error occurred when fetching entries by type from Contentful`,
+            error: "an error occurred when fetching entries by type from Contentful",
         };
     }
     console.log(entries);
     return entries;
 };
 
-export const getFirstEntryByType = async (type: string) => {
-    let entries;
+export const getFirstEntryByType = async <Type extends ContentTypes>(
+    contentType: Type,
+) => {
+    let firstEntry;
     try {
-        entries = await client.getEntries({
-            content_type: type,
+        const entries = await client.getEntries<
+            contentful.EntrySkeletonType<TypeFields[Type], Type>
+        >({
+            content_type: contentType,
         });
+        firstEntry = entries.items[0];
     } catch (e) {
         console.error(e);
         return {
-            error: `an error occurred when fetching entries by type from Contentful`,
+            error: "an error occurred when fetching entries by type from Contentful",
         };
     }
-    console.log(entries);
-    return entries.items.length ? entries.items[0] : null;
+    return firstEntry;
 };

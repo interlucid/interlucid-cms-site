@@ -1,5 +1,7 @@
 {
-    "include": [".react-router/types/**/*"],
+    "ts-node": {
+        "require": ["tsconfig-paths/register"]
+    },
     "compilerOptions": {
         "types": ["react-router", "vite/client"],
         "skipLibCheck": true,
@@ -12,11 +14,13 @@
         "resolveJsonModule": true,
         "target": "ES2019",
         "strict": true,
-        "baseUrl": ".",
+        "baseUrl": "./",
         "rootDirs": [".", "./.react-router/types"],
         "paths": {
-            "~/*": ["./app/*"]
+            "@app/*": ["./app/*"],
+            "@genTypes/*": ["./types/*"]
         },
         "noEmit": true
-    }
+    },
+    "include": [".react-router/types/**/*", "app/**/*", "types/**/*"]
 }

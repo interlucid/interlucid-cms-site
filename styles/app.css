@@ -1,15 +1,15 @@
-@import 'tailwindcss';
+@import "tailwindcss";
 
 @theme {
-  --spacing-*: initial;
-  --spacing-1: 5px;
-  --spacing-2: 10px;
-  --spacing-3: 20px;
-  --spacing-4: 35px;
-  --spacing-5: 70px;
-  --spacing-6: 100px;
-  --spacing-7: 150px;
-  --spacing-8: 240px;
+    --spacing-*: initial;
+    --spacing-1: 5px;
+    --spacing-2: 10px;
+    --spacing-3: 20px;
+    --spacing-4: 35px;
+    --spacing-5: 70px;
+    --spacing-6: 100px;
+    --spacing-7: 150px;
+    --spacing-8: 240px;
 }
 
 /*
@@ -21,11 +21,11 @@
   color utility to any element that depends on these defaults.
 */
 @layer base {
-  *,
-  ::after,
-  ::before,
-  ::backdrop,
-  ::file-selector-button {
-    border-color: var(--color-gray-200, currentColor);
-  }
+    *,
+    ::after,
+    ::before,
+    ::backdrop,
+    ::file-selector-button {
+        border-color: var(--color-gray-200, currentColor);
+    }
 }
